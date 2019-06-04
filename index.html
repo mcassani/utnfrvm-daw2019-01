@@ -23,11 +23,16 @@
     <div class="page-header">
       <h1>Hola {{nombre || 'Mundo'}} <small>Mayo de 2019</small></h1>
     </div>
-    <div>
-      <p>Bienvenidos a la clase de AngularJS del profesor {{apellido}}</p>
-      <input type="text" class="form-control" ng-model="nombre">
-      <span class="btn  btn-warning" ng-click="mostrarMensaje()">Calcular</span>
+    <div class="row" ng-repeat="c in contactos">
+      <div class="col-sm-4" ng-class="{'bg-primary' : c.genero == 'm', 'bg-danger' : c.genero == 'f' }">{{c.nombre}}
+      </div>
+      <div class="col-sm-4">{{c.telefono}}</div>
+      <div class="col-sm-4">{{c.email}}</div>
     </div>
+    <br />
+    <label>Nombre: </label>
+    <input type="text" ng-model="nombrePersona" class="form-control">
+    <span class="btn btn-danger" ng-click="agregarElemento()">Agregar Elemento</span>
   </div>
 </body>
 
