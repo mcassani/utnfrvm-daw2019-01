@@ -18,16 +18,26 @@
 </head>
 
 <body ng-controller="MainCtrl">
-
   <div class="container">
+      {{ordenado}}
     <div class="page-header">
       <h1>Hola {{nombre || 'Mundo'}} <small>Mayo de 2019</small></h1>
     </div>
-    <div class="row" ng-repeat="c in contactos">
-      <div class="col-sm-4" ng-class="{'bg-primary' : c.genero == 'm', 'bg-danger' : c.genero == 'f' }">{{c.nombre}}
+    
+    <div class="col-sm-2" ng-click="ordenado = !ordenado">NOMBRE</div>
+    <div class="col-sm-1">TEL</div>
+    <div class="col-sm-3">MAIL</div>
+    <div class="col-sm-2">SALDO</div>
+    <div class="col-sm-4">F. NAC</div>
+    <div class="row" ng-repeat="c in contactos | orderBy : 'nombre' : ordenado ">
+
+      <div class="col-sm-2" ng-class="{'bg-primary' : c.genero == 'm', 'bg-danger' : c.genero == 'f' }">
+        {{c.nombre | uppercase}}
       </div>
-      <div class="col-sm-4">{{c.telefono}}</div>
-      <div class="col-sm-4">{{c.email}}</div>
+      <div class="col-sm-1">{{c.telefono}}</div>
+      <div class="col-sm-3">{{c.email | lowercase}}</div>
+      <div class="col-sm-2">{{c.saldo | currency : 'AR$'}}</div>
+      <div class="col-sm-4">{{c.fechaNacimiento | date : 'dd/MM/yy HH:mm:ss'}}</div>
     </div>
     <br />
     <label>Nombre: </label>
